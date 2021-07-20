@@ -1,0 +1,19 @@
+Drivers for Multicurrent10.
+
+It is necessary to install PySerial module.
+
+Multicurrent10.py allows the user to control Multicurrent10 using python. For this purpose, the library provides the class "multicurrent" along with some methods in order to send command to Multicurrent10. The methods are the following:
+
+- __init__(COM) : constructor of the class. It takes as argument the serial port at which Multicurrent10 is listenening
+- turn_on_source(source): this method turns on one source. It takes as argument an integer from 1 to 10.
+- turn_on_all(): this method turns on all the sources.
+- turn_off_source(source): this method turns off one source. It takes as argument an integer from 1 to 10.
+- turn_off_all(): this method turns off all the sources.
+- set_current_source(current, source): this method set the current provided by one source. It takes a current value (float) as first argument and the source (int) as second argument.
+- read_voltage(source): this method allows the user to read the voltage of a source.
+- max_current_source(max_current, source): this method set the maximum current that can be provided by one source. It takes a max. current value (float) as first argument and the source (int) as second argument.
+- set_calibration_current(current): this method allow to use a different current for the calibration of sources. It is 100 mA by default.
+- calibration(): this method performs the calibration of the different sources for the adaptative power management.
+- off(): this method turn off Multicurrent10. However it can still be turned on using the reset method.
+- reset(): this method resets Multicurrent10.
+- __del__(): this method turns off Multicurrent10, close the serial communication and delete the object.
