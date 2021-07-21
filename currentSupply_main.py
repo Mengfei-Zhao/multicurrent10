@@ -17,6 +17,7 @@ from PyQt5.QtWidgets import QApplication, QButtonGroup, QMainWindow, QMessageBox
 from serial import serial_for_url
 from Ui_win import Ui_MainWindow
 from multicurrent10 import Multicurrent10
+from dataInterface import DataInterface
 
 
 class MyMainWin(QMainWindow, Ui_MainWindow):
@@ -25,8 +26,10 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyMainWin, self).__init__(parent)
         self.initGUI()
+        # self.DI = DataInterface()
+        # self.multi = self.DI.multi
         self.init_multicurrent10_dev()
-        self.readDataFromSerialPort_thread()
+        # self.readDataFromSerialPort_thread()
         # multicurrent program interface
         # self.getEnteredSetCurrent()
         # print(self.ch1_setCurrent)
@@ -59,7 +62,6 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         self.readData_freshTime = 2000  # ms
         self.setCurrEnterFinish_event()
         self.setSwitchChange_event()
-
 
     def setCurrEnterFinish_event(self):
         """when the SetCurrent is enter finished, I will run setCurrent_cha function.
@@ -276,22 +278,26 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         """
         if self.radioButton.isChecked() == True and self.radioButton_2.isChecked() == False:
             self.multi.turn_off_source(1)
-            # self.readDataCha1_backend_stop()
+            self.readDataCha1_backend_stop()
+            # self.readData_thread
         elif self.radioButton.isChecked() == False and self.radioButton_2.isChecked() == True:
             self.multi.turn_on_source(1)
-            # self.readDataCha1_backend_start()
+            self.readDataCha1_backend_start()
+            # self.readData_thread = threading.Thread(
+            # target=self.multi.read_voltage(1), name="readData_thread")
+            # self.readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
+            # self.readData_thread.start()
             # self.readVoltCha1()
-            
 
     def setOnOff_cha2(self):
         """set the switch state of channel 2
         """
         if self.radioButton_3.isChecked() == True and self.radioButton_4.isChecked() == False:
             self.multi.turn_off_source(2)
-            # self.readDataCha2_backend_stop()
+            self.readDataCha2_backend_stop()
         elif self.radioButton_3.isChecked() == False and self.radioButton_4.isChecked() == True:
             self.multi.turn_on_source(2)
-            # self.readDataCha2_backend_start()
+            self.readDataCha2_backend_start()
             self.readVoltCha2()
 
     def setOnOff_cha3(self):
@@ -299,10 +305,10 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         """
         if self.radioButton_5.isChecked() == True and self.radioButton_6.isChecked() == False:
             self.multi.turn_off_source(3)
-            # self.readDataCha3_backend_stop()
+            self.readDataCha3_backend_stop()
         elif self.radioButton_5.isChecked() == False and self.radioButton_6.isChecked() == True:
             self.multi.turn_on_source(3)
-            # self.readDataCha3_backend_start()
+            self.readDataCha3_backend_start()
             self.readVoltCha3()
 
     def setOnOff_cha4(self):
@@ -375,15 +381,11 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
             self.multi.turn_on_source(10)
             self.readDataCha10_backend_start()
 
-# ------read data from serial port in backend-------------------
-    def readDataFromSerialPort_thread(self):
-        # 开始读取串口缓存区的子线程，一直在读取数据
-        readData_thread = threading.Thread(
-            target=self.readVoltCha1, name="readData_thread")
-        # readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
-        readData_thread.start()  # 启动该线程
 
 # ------- Read Cha1 --------------------------------------------
+    # def showVolt(self):
+    #     self.textBrowser.setText(str('%.4f' % self.multi.rdVolt)+' V')
+
     def readVoltCha1(self):
         """readback voltage from device
         """
@@ -391,38 +393,38 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         self.textBrowser.setText(str('%.4f' % cha1_volt)+' V')
         time.sleep(0.005)
 
-    # def readPhotodiodeCurrCha1(self):
-    #     """readback the photodiode current from device.
-    #     """
-    #     cha1_pdCurr = self.multi.read_photodiode(1)
-    #     if cha1_pdCurr >= 0.00:
-    #         text = ' ' + str('%.2f' % cha1_pdCurr)
-    #     else:
-    #         text = str('%.2f' % cha1_pdCurr)
-    #     self.textBrowser_11.setText(text+' uA')
+    def readPhotodiodeCurrCha1(self):
+        """readback the photodiode current from device.
+        """
+        cha1_pdCurr = self.multi.read_photodiode(1)
+        if cha1_pdCurr >= 0.00:
+            text = ' ' + str('%.2f' % cha1_pdCurr)
+        else:
+            text = str('%.2f' % cha1_pdCurr)
+        self.textBrowser_11.setText(text+' uA')
 
-    # def readDataCha1(self):
-    #     """read voltage and photodiode from device.
-    #     """
-    #     self.readVoltCha1()
-    #     time.sleep(0.005)
-    #     self.readPhotodiodeCurrCha1()
+    def readDataCha1(self):
+        """read voltage and photodiode from device.
+        """
+        self.readVoltCha1()
+        time.sleep(0.005)
+        self.readPhotodiodeCurrCha1()
 
-    # def readDataCha1_backend_start(self):
-    #     """backend that reading data from device 
-    #     """
-    #     self.cha1ReadData_timer = QtCore.QTimer()
-    #     self.cha1ReadData_timer.interval = self.readData_freshTime
-    #     self.cha1ReadData_timer.start()
-    #     self.cha1ReadData_timer.timeout.connect(self.readDataCha1)
+    def readDataCha1_backend_start(self):
+        """backend that reading data from device 
+        """
+        self.cha1ReadData_timer = QtCore.QTimer()
+        self.cha1ReadData_timer.interval = self.readData_freshTime
+        self.cha1ReadData_timer.start()
+        self.cha1ReadData_timer.timeout.connect(self.readDataCha1)
 
-    # def readDataCha1_backend_stop(self):
-    #     """stop the backend that reading data from device 
-    #     """
-    #     self.cha1ReadData_timer.stop()
-    #     self.textBrowser.setText(
-    #         str('%.4f' % 0.0000)+' V')  # the default state
-    #     self.textBrowser_11.setText(' '+str('%.2f' % 0.00)+' uA')
+    def readDataCha1_backend_stop(self):
+        """stop the backend that reading data from device 
+        """
+        self.cha1ReadData_timer.stop()
+        self.textBrowser.setText(
+            str('%.4f' % 0.0000)+' V')  # the default state
+        self.textBrowser_11.setText(' '+str('%.2f' % 0.00)+' uA')
 
     # def readPhotodiodeCha1_backend_start(self):
     #     """backend that reading voltage from device
@@ -806,6 +808,14 @@ class MyMainWin(QMainWindow, Ui_MainWindow):
         self.textBrowser_10.setText(
             str('%.4f' % 0.0000)+' V')  # the default state
         self.textBrowser_20.setText(' '+str('%.2f' % 0.00)+' uA')
+
+# ------read data from serial port in backend-------------------
+# def readDataFromSerialPort_thread(self):
+#     # 开始读取串口缓存区的子线程，一直在读取数据
+#     readData_thread = threading.Thread(
+#         target=self.readVoltCha1, name="readData_thread")
+#     readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
+#     readData_thread.start()  # 启动该线程
 
 
 # -----------------------------------------------------------------------

@@ -80,13 +80,16 @@ class Multicurrent10:
         line = " "
         self.ser.flushInput()
         while line[:1] != "v" or line[1:2] != str(source-1):
+        # while True:
             line = self.ser.readline(256)
             line = line.decode()
-            print('read Voltage line: ', line)
+            # print('read Voltage line: ', line)
             if line[:1] == "v" and line[1:2] == str(source-1):
                 if line[3:4] == " ":
                     return 0
+                    self.rdVolt = 0
                 else:
+                    # self.rdVolt = float(line[3:-3])
                     return float(line[3:-3])
     # def read_voltage(self):
     #     """Read the voltage of a source
@@ -124,7 +127,7 @@ class Multicurrent10:
         while line[:1] != "p" or line[1:2] != str(source-1):
             line = self.ser.readline(256)
             line = line.decode()
-            print('read photodiode line:', line)
+            # print('read photodiode line:', line)
             if line[:1] == "p" and line[1:2] == str(source-1):
                 if line[2:-1] == " ":
                     return 0
@@ -185,10 +188,10 @@ if __name__ == '__main__':
     time.sleep(1)
     # multi.read_voltage(1)
     # multi.read_serial_port_data()
-    while True:
-        cha, volt = multi.read_voltage()
-        print('cha: ', cha)
-        print('volt: ', volt)
+    # while True:
+    #     cha, volt = multi.read_voltage()
+    #     print('cha: ', cha)
+    #     print('volt: ', volt)
     # multi.read_voltage()
     # multi.read_voltage()
     time.sleep(2)
