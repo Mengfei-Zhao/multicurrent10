@@ -1,0 +1,20 @@
+
+# Set the default state of switch
+CHA1_SWITCH = 'OFF'
+CHA2_SWITCH = 'OFF'
+CHA3_SWITCH = 'OFF'
+CHA4_SWITCH = 'OFF'
+CHA5_SWITCH = 'OFF'
+CHA6_SWITCH = 'OFF'
+CHA7_SWITCH = 'OFF'
+CHA8_SWITCH = 'OFF'
+CHA9_SWITCH = 'OFF'
+CHA10_SWITCH = 'OFF'
+
+# Time 
+READ_DATA_TIME_INTERVAL = 5000  # ms
+SWITCH_OFF_TAIL_DELAY = 0.1  # seconds
+
+# The decimal digits of shown voltage
+VOLT_DECIMAL_DIGITS = '%.4f'
+PD_DECIMAL_DIGITS = '%.2f'
