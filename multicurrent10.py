@@ -9,8 +9,9 @@ from serial.serialutil import SerialException
 class Multicurrent10:
     """This is the class about the basic operations of multicurrent10"""
 
-    def __init__(self, COM):
-        """Constructor of the class. It takes as argument the serial port at which Multicurrent10 is listenning.
+    def open_serial_port(self, COM):
+        """Constructor of the class. It takes as argument the serial port at \
+            which Multicurrent10 is listenning.
 
         Args:
             COM (str): such as 'COM6'
@@ -62,35 +63,37 @@ class Multicurrent10:
         """read all of data from serial port
         """
         line1 = " "
-        line2 = " "
+        line = " "
         self.ser.flushInput()
         while True:
             line1 = self.ser.readline(256)
-            line2 = line1.decode()
+            self.line = line1.decode()
 
-    def read_voltage(self, source):
-        """Read the voltage of a source
 
-        Args:
-            source (int): such as 1 or 6
+    # def read_voltage(self, source):
+    #     """Read the voltage of a source
 
-        Returns:
-            voltage (float): such as 3.1210, unit: volt
-        """
-        line = " "
-        self.ser.flushInput()
-        while line[:1] != "v" or line[1:2] != str(source-1):
-        # while True:
-            line = self.ser.readline(256)
-            line = line.decode()
-            # print('read Voltage line: ', line)
-            if line[:1] == "v" and line[1:2] == str(source-1):
-                if line[3:4] == " ":
-                    return 0
-                    self.rdVolt = 0
-                else:
-                    # self.rdVolt = float(line[3:-3])
-                    return float(line[3:-3])
+    #     Args:
+    #         source (int): such as 1 or 6
+
+    #     Returns:
+    #         voltage (float): such as 3.1210, unit: volt
+    #     """
+    #     line = " "
+    #     self.ser.flushInput()
+    #     while line[:1] != "v" or line[1:2] != str(source-1):
+    #     # while True:
+    #         line = self.ser.readline(256)
+    #         line = line.decode()
+    #         # print('read Voltage line: ', line)
+    #         if line[:1] == "v" and line[1:2] == str(source-1):
+    #             if line[3:4] == " ":
+    #                 return 0
+    #                 self.rdVolt = 0
+    #             else:
+    #                 # self.rdVolt = float(line[3:-3])
+    #                 return float(line[3:-3])
+
     # def read_voltage(self):
     #     """Read the voltage of a source
 
@@ -113,26 +116,26 @@ class Multicurrent10:
     #                 volt = float(line[3:-3])
     #             return cha, volt
 
-    def read_photodiode(self, source):
-        """Read the photodiode current. 
+    # def read_photodiode(self, source):
+    #     """Read the photodiode current. 
 
-        Args:
-            source (int): such as 1 or 6
+    #     Args:
+    #         source (int): such as 1 or 6
 
-        Returns:
-            current of photodiode (float): such as 0.02, unit: uA
-        """
-        line = " "
-        self.ser.flushInput()
-        while line[:1] != "p" or line[1:2] != str(source-1):
-            line = self.ser.readline(256)
-            line = line.decode()
-            # print('read photodiode line:', line)
-            if line[:1] == "p" and line[1:2] == str(source-1):
-                if line[2:-1] == " ":
-                    return 0
-                else:
-                    return float(line[2:-1])
+    #     Returns:
+    #         current of photodiode (float): such as 0.02, unit: uA
+    #     """
+    #     line = " "
+    #     self.ser.flushInput()
+    #     while line[:1] != "p" or line[1:2] != str(source-1):
+    #         line = self.ser.readline(256)
+    #         line = line.decode()
+    #         # print('read photodiode line:', line)
+    #         if line[:1] == "p" and line[1:2] == str(source-1):
+    #             if line[2:-1] == " ":
+    #                 return 0
+    #             else:
+    #                 return float(line[2:-1])
 
     def set_max_current_source(self, max_current, source):
         """Set the maximum current that can be provided by one source.
@@ -187,7 +190,7 @@ if __name__ == '__main__':
     multi.set_current_source(0, 3)
     time.sleep(1)
     # multi.read_voltage(1)
-    # multi.read_serial_port_data()
+    multi.read_serial_port_data()
     # while True:
     #     cha, volt = multi.read_voltage()
     #     print('cha: ', cha)
