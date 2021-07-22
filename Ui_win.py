@@ -389,6 +389,7 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.radioButton_21.setText("")
+        self.radioButton_21.setCheckable(True)
         self.radioButton_21.setObjectName("radioButton_21")
         self.textBrowser_2 = QtWidgets.QTextBrowser(self.centralwidget)
         self.textBrowser_2.setGeometry(QtCore.QRect(500, 165, 151, 31))
@@ -1150,7 +1151,7 @@ class Ui_MainWindow(object):
         self.radioButton_25.setText("")
         self.radioButton_25.setObjectName("radioButton_25")
         self.radioButton_26 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_26.setGeometry(QtCore.QRect(1065, 435, 31, 36))
+        self.radioButton_26.setGeometry(QtCore.QRect(1065, 440, 31, 36))
         self.radioButton_26.setStyleSheet("\n"
 "\n"
 "QRadioButton::indicator {\n"
@@ -1426,16 +1427,6 @@ class Ui_MainWindow(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-        self.actionon = QtWidgets.QAction(MainWindow)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("f:\\Python_Prj\\SIMIT\\SFQ_IbCtrl\\currentSupply\\icons/on.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.actionon.setIcon(icon)
-        self.actionon.setObjectName("actionon")
-        self.actionoff = QtWidgets.QAction(MainWindow)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("f:\\Python_Prj\\SIMIT\\SFQ_IbCtrl\\currentSupply\\icons/off.jpg"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.actionoff.setIcon(icon1)
-        self.actionoff.setObjectName("actionoff")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -1461,6 +1452,4 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Channel"))
         self.label_2.setText(_translate("MainWindow", "Alias"))
         self.label_18.setText(_translate("MainWindow", "All Off"))
-        self.actionon.setText(_translate("MainWindow", "on"))
-        self.actionoff.setText(_translate("MainWindow", "off"))
 import icons_rc
