@@ -8,6 +8,8 @@
 # --------------------------------------------------------------
 
 
+from gui_showReadData import GUI_ShowReadData
+from gui_ctrl import GUI_Ctrl
 import sys
 import threading
 import time
@@ -22,16 +24,28 @@ from multicurrent10 import Multicurrent10
 # from dataInterface import DataInterface
 from serialPortRxDataParser import SerialPortRxDataParser
 
+# Time
+from constants import READ_DATA_TIME_INTERVAL
 
 
-class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
+class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init, GUI_Ctrl, GUI_ShowReadData):
     """The class that control GUI window"""
 
     def __init__(self, multi, parent=None):
         super(MyMainWin, self).__init__(parent)
+        self.setupUi(self)  # initialize the windows
+        self.setFixedSize(self.width(), self.height()
+                          )  # fix the size of window
         self.multi = multi
         self.serialPortRxDataParser = SerialPortRxDataParser(multi)
-        self.initGUI()
+        self.gi_setDefaultSwitchCtrlWord()
+        self.gi_addUnitForSetCurrent()  # add a unit(mA) for SetCurrent
+        self.gi_setRadioButtonGroup()
+        self.gi_setDefaultSwitchState()
+        self.gc_setCurrEnterFinishEvent()
+        self.gc_setSwitchChangeEvent()
+        time.sleep(0.5)  # seconds
+        self.gsrd_readDataBackendStart()
         # self.DI = DataInterface()
         # self.multi = self.DI.multi
         # self.init_multicurrent10_dev()
@@ -57,130 +71,6 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
         #     self.runAlgorithm)
 # ------- My initialization setting ------------------------------------
 
-    def initGUI(self):
-        """initialize the GUI
-        """
-        self.CHA1 = 'OFF'
-        self.CHA2 = 'OFF'
-        self.CHA3 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        # self.CHA1 = 'OFF'
-        self.setupUi(self)  # initialize the windows
-        self.setFixedSize(self.width(), self.height()
-                          )  # fix the size of window
-
-        self.addUnitForSetCurrent()  # add a unit(mA) for SetCurrent
-        self.setRadioButtonGroup()
-        self.gi_setDefaultSwitchState()
-        self.readData_freshTime = 5000  # ms
-        self.SWITCH_OFF_TAIL_DELAY = 0.1  # seconds
-
-        self.setCurrEnterFinish_event()
-        self.setSwitchChange_event()
-        time.sleep(0.5)
-        self.readData_backend_start()
-
-    def setCurrEnterFinish_event(self):
-        """when the SetCurrent is enter finished, I will run setCurrent_cha \
-            function.
-        """
-        self.doubleSpinBox.editingFinished.connect(self.setCurrent_cha1)
-        self.doubleSpinBox_2.editingFinished.connect(self.setCurrent_cha2)
-        self.doubleSpinBox_3.editingFinished.connect(self.setCurrent_cha3)
-        self.doubleSpinBox_4.editingFinished.connect(self.setCurrent_cha4)
-        self.doubleSpinBox_5.editingFinished.connect(self.setCurrent_cha5)
-        self.doubleSpinBox_6.editingFinished.connect(self.setCurrent_cha6)
-        self.doubleSpinBox_7.editingFinished.connect(self.setCurrent_cha7)
-        self.doubleSpinBox_8.editingFinished.connect(self.setCurrent_cha8)
-        self.doubleSpinBox_9.editingFinished.connect(self.setCurrent_cha9)
-        self.doubleSpinBox_10.editingFinished.connect(self.setCurrent_cha10)
-
-    def setSwitchChange_event(self):
-        """when the On-Off switch changes, I will run setOnOff_cha function.
-        """
-        self.radioButton.toggled.connect(self.setOnOff_cha1)
-        self.radioButton_3.toggled.connect(self.setOnOff_cha2)
-        self.radioButton_5.toggled.connect(self.setOnOff_cha3)
-        self.radioButton_7.toggled.connect(self.setOnOff_cha4)
-        self.radioButton_9.toggled.connect(self.setOnOff_cha5)
-        self.radioButton_11.toggled.connect(self.setOnOff_cha6)
-        self.radioButton_13.toggled.connect(self.setOnOff_cha7)
-        self.radioButton_15.toggled.connect(self.setOnOff_cha8)
-        self.radioButton_17.toggled.connect(self.setOnOff_cha9)
-        self.radioButton_19.toggled.connect(self.setOnOff_cha10)
-
-    def setRadioButtonGroup(self):
-        """to deal with the group of radio button
-        """
-        bg_cha1 = QButtonGroup(self)
-        bg_cha1.addButton(self.radioButton)
-        bg_cha1.addButton(self.radioButton_2)
-
-        bg_cha2 = QButtonGroup(self)
-        bg_cha2.addButton(self.radioButton_3)
-        bg_cha2.addButton(self.radioButton_4)
-
-        bg_cha3 = QButtonGroup(self)
-        bg_cha3.addButton(self.radioButton_5)
-        bg_cha3.addButton(self.radioButton_6)
-
-        bg_cha4 = QButtonGroup(self)
-        bg_cha4.addButton(self.radioButton_7)
-        bg_cha4.addButton(self.radioButton_8)
-
-        bg_cha5 = QButtonGroup(self)
-        bg_cha5.addButton(self.radioButton_9)
-        bg_cha5.addButton(self.radioButton_10)
-
-        bg_cha6 = QButtonGroup(self)
-        bg_cha6.addButton(self.radioButton_11)
-        bg_cha6.addButton(self.radioButton_12)
-
-        bg_cha7 = QButtonGroup(self)
-        bg_cha7.addButton(self.radioButton_13)
-        bg_cha7.addButton(self.radioButton_14)
-
-        bg_cha8 = QButtonGroup(self)
-        bg_cha8.addButton(self.radioButton_15)
-        bg_cha8.addButton(self.radioButton_16)
-
-        bg_cha9 = QButtonGroup(self)
-        bg_cha9.addButton(self.radioButton_17)
-        bg_cha9.addButton(self.radioButton_18)
-
-        bg_cha10 = QButtonGroup(self)
-        bg_cha10.addButton(self.radioButton_19)
-        bg_cha10.addButton(self.radioButton_20)
-
-    # def set_default_switch_state(self):
-    #     """set the default state of the On-Off switch
-    #     """
-    #     self.radioButton.setChecked(True)  # default is off
-    #     self.radioButton_2.setChecked(False)
-    #     self.radioButton_3.setChecked(True)  # default is off
-    #     self.radioButton_4.setChecked(False)
-    #     self.radioButton_5.setChecked(True)  # default is off
-    #     self.radioButton_6.setChecked(False)
-    #     self.radioButton_7.setChecked(True)  # default is off
-    #     self.radioButton_8.setChecked(False)
-    #     self.radioButton_9.setChecked(True)  # default is off
-    #     self.radioButton_10.setChecked(False)
-    #     self.radioButton_11.setChecked(True)  # default is off
-    #     self.radioButton_12.setChecked(False)
-    #     self.radioButton_13.setChecked(True)  # default is off
-    #     self.radioButton_14.setChecked(False)
-    #     self.radioButton_15.setChecked(True)  # default is off
-    #     self.radioButton_16.setChecked(False)
-    #     self.radioButton_17.setChecked(True)  # default is off
-    #     self.radioButton_18.setChecked(False)
-    #     self.radioButton_19.setChecked(True)  # default is off
-    #     self.radioButton_20.setChecked(False)
-
     # def init_multicurrent10_dev(self):
     #     """initialize the serial port and device
     #     """
@@ -192,22 +82,9 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
     #         QMessageBox.error(self, 'Error', 'The serial port is occupied!')
         # QMessageBox.information(
         #     self, 'Message', 'Multicurrent10 has been connected successfully.  ')
-# ------- Set showing format --------------------------------------------
-
-    def addUnitForSetCurrent(self):
-        mA = ' mA'
-        self.doubleSpinBox.setSuffix(mA)
-        self.doubleSpinBox_2.setSuffix(mA)
-        self.doubleSpinBox_3.setSuffix(mA)
-        self.doubleSpinBox_4.setSuffix(mA)
-        self.doubleSpinBox_5.setSuffix(mA)
-        self.doubleSpinBox_6.setSuffix(mA)
-        self.doubleSpinBox_7.setSuffix(mA)
-        self.doubleSpinBox_8.setSuffix(mA)
-        self.doubleSpinBox_9.setSuffix(mA)
-        self.doubleSpinBox_10.setSuffix(mA)
 
 # ------- Set param for device -----------------------------------------------------
+
     def getEnteredAlias(self):
         """get the entered alias
         """
@@ -235,233 +112,10 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
     #     self.ch8_setCurrent = self.doubleSpinBox_8.cleanText()
     #     self.ch9_setCurrent = self.doubleSpinBox_9.cleanText()
     #     self.ch10_setCurrent = self.doubleSpinBox_10.cleanText()
-# ---   setCurrent_cha---------------------------------------------
-    def setCurrent_cha1(self):
-        """load the setting current to device
-        """
-        self.ch1_setCurrent = self.doubleSpinBox.cleanText()
-        self.multi.set_current_source(self.ch1_setCurrent, 1)
 
-    def setCurrent_cha2(self):
-        """load the setting current to device
-        """
-        self.ch2_setCurrent = self.doubleSpinBox_2.cleanText()
-        self.multi.set_current_source(self.ch2_setCurrent, 2)
-
-    def setCurrent_cha3(self):
-        """load the setting current to device
-        """
-        self.ch3_setCurrent = self.doubleSpinBox_3.cleanText()
-        self.multi.set_current_source(self.ch3_setCurrent, 3)
-
-    def setCurrent_cha4(self):
-        """load the setting current to device
-        """
-        self.ch4_setCurrent = self.doubleSpinBox_4.cleanText()
-        self.multi.set_current_source(self.ch4_setCurrent, 4)
-
-    def setCurrent_cha5(self):
-        """load the setting current to device
-        """
-        self.ch5_setCurrent = self.doubleSpinBox_5.cleanText()
-        self.multi.set_current_source(self.ch5_setCurrent, 5)
-
-    def setCurrent_cha6(self):
-        """load the setting current to device
-        """
-        self.ch6_setCurrent = self.doubleSpinBox_6.cleanText()
-        self.multi.set_current_source(self.ch6_setCurrent, 6)
-
-    def setCurrent_cha7(self):
-        """load the setting current to device
-        """
-        self.ch7_setCurrent = self.doubleSpinBox_7.cleanText()
-        self.multi.set_current_source(self.ch7_setCurrent, 7)
-
-    def setCurrent_cha8(self):
-        """load the setting current to device
-        """
-        self.ch8_setCurrent = self.doubleSpinBox_8.cleanText()
-        self.multi.set_current_source(self.ch8_setCurrent, 8)
-
-    def setCurrent_cha9(self):
-        """load the setting current to device
-        """
-        self.ch9_setCurrent = self.doubleSpinBox_9.cleanText()
-        self.multi.set_current_source(self.ch9_setCurrent, 9)
-
-    def setCurrent_cha10(self):
-        """load the setting current to device
-        """
-        self.ch10_setCurrent = self.doubleSpinBox_10.cleanText()
-        self.multi.set_current_source(self.ch10_setCurrent, 10)
-
-
-# ---- setOnOff_cha --------------------------------------------------------------------------
-
-
-    def setOnOff_cha1(self):
-        """set the switch state of channel 1
-        """
-        if self.radioButton.isChecked() == True and self.radioButton_2.isChecked() == False:
-            self.multi.turn_off_source(1)
-            self.CH1 = 'OFF'
-            # self.readData_backend_stop()
-            time.sleep(self.SWITCH_OFF_TAIL_DELAY)
-            self.textBrowser.setText(
-                str('%.4f' % 0.0000)+' V')  # the default state
-            print('cha1 is off, and voltage is 0')
-            # self.readData_backend_stop()
-            # self.readData_thread
-        elif self.radioButton.isChecked() == False and self.radioButton_2.isChecked() == True:
-            self.multi.turn_on_source(1)
-
-            self.CHA1 = 'ON'
-            # self.readData_backend_start()
-            # self.readData_backend_start()
-            # self.readData_thread = threading.Thread(
-            # target=self.multi.read_voltage(1), name="readData_thread")
-            # self.readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
-            # self.readData_thread.start()
-            # self.readVoltCha1()
-
-    def setOnOff_cha2(self):
-        """set the switch state of channel 2
-        """
-        if self.radioButton_3.isChecked() == True and self.radioButton_4.isChecked() == False:
-            self.multi.turn_off_source(2)
-            # self.readData2_backend_stop()
-            # self.readData_backend_stop()
-            # self.CHA2 = 'OFF'
-            time.sleep(self.SWITCH_OFF_TAIL_DELAY)
-            self.textBrowser_2.setText(
-                str('%.4f' % 0.0000)+' V')  # the default state
-        elif self.radioButton_3.isChecked() == False and self.radioButton_4.isChecked() == True:
-            self.multi.turn_on_source(2)
-            # self.readData_backend_start()
-            self.CHA2 = 'ON'
-            # self.readData2_backend_start()
-            # self.readVoltCha2()
-
-    def setOnOff_cha3(self):
-        """set the switch state of channel 3
-        """
-        if self.radioButton_5.isChecked() == True and self.radioButton_6.isChecked() == False:
-            self.multi.turn_off_source(3)
-            # self.readData3_backend_stop()
-            # self.readData_backend_stop()
-            # self.CHA3 = 'OFF'
-            time.sleep(self.SWITCH_OFF_TAIL_DELAY)
-            self.textBrowser_3.setText(
-                str('%.4f' % 0.0000)+' V')  # the default state
-        elif self.radioButton_5.isChecked() == False and self.radioButton_6.isChecked() == True:
-            self.multi.turn_on_source(3)
-            # self.readData_backend_start()
-            self.CHA3 = 'ON'
-            # self.readData3_backend_start()
-            # self.readVoltCha3()
-
-    def setOnOff_cha4(self):
-        """set the switch state of channel 4
-        """
-        if self.radioButton_7.isChecked() == True and self.radioButton_8.isChecked() == False:
-            self.multi.turn_off_source(4)
-            # self.readDataCha4_backend_stop()
-        elif self.radioButton_7.isChecked() == False and self.radioButton_8.isChecked() == True:
-            self.multi.turn_on_source(4)
-            # self.readDataCha4_backend_start()
-
-    def setOnOff_cha5(self):
-        """set the switch state of channel 5
-        """
-        if self.radioButton_9.isChecked() == True and self.radioButton_10.isChecked() == False:
-            self.multi.turn_off_source(5)
-            self.readDataCha5_backend_stop()
-        elif self.radioButton_9.isChecked() == False and self.radioButton_10.isChecked() == True:
-            self.multi.turn_on_source(5)
-            self.readDataCha5_backend_start()
-
-    def setOnOff_cha6(self):
-        """set the switch state of channel 6
-        """
-        if self.radioButton_11.isChecked() == True and self.radioButton_12.isChecked() == False:
-            self.multi.turn_off_source(6)
-            self.readDataCha6_backend_stop()
-        elif self.radioButton_11.isChecked() == False and self.radioButton_12.isChecked() == True:
-            self.multi.turn_on_source(6)
-            self.readDataCha6_backend_start()
-
-    def setOnOff_cha7(self):
-        """set the switch state of channel 7
-        """
-        if self.radioButton_13.isChecked() == True and self.radioButton_14.isChecked() == False:
-            self.multi.turn_off_source(7)
-            self.readDataCha7_backend_stop()
-        elif self.radioButton_13.isChecked() == False and self.radioButton_14.isChecked() == True:
-            self.multi.turn_on_source(7)
-            self.readDataCha7_backend_start()
-
-    def setOnOff_cha8(self):
-        """set the switch state of channel 8
-        """
-        if self.radioButton_15.isChecked() == True and self.radioButton_16.isChecked() == False:
-            self.multi.turn_off_source(8)
-            self.readDataCha8_backend_stop()
-        elif self.radioButton_15.isChecked() == False and self.radioButton_16.isChecked() == True:
-            self.multi.turn_on_source(8)
-            self.readDataCha8_backend_start()
-
-    def setOnOff_cha9(self):
-        """set the switch state of channel 9
-        """
-        if self.radioButton_17.isChecked() == True and self.radioButton_18.isChecked() == False:
-            self.multi.turn_off_source(9)
-            self.readDataCha9_backend_stop()
-        elif self.radioButton_17.isChecked() == False and self.radioButton_18.isChecked() == True:
-            self.multi.turn_on_source(9)
-            self.readDataCha9_backend_start()
-
-    def setOnOff_cha10(self):
-        """set the switch state of channel 10
-        """
-        if self.radioButton_19.isChecked() == True and self.radioButton_20.isChecked() == False:
-            self.multi.turn_off_source(10)
-            self.readDataCha10_backend_stop()
-        elif self.radioButton_19.isChecked() == False and self.radioButton_20.isChecked() == True:
-            self.multi.turn_on_source(10)
-            self.readDataCha10_backend_start()
-
-    def prepareVoltAndPd(self):
-        # if self.CHA1 == 'OFF':
-        #     self.textBrowser.setText(
-        #         str('%.4f' % 0.0000)+' V')  # the default state
-        #     print('cha1 is off, and voltage is 0')
-        # if self.CHA2 == 'OFF':
-        #     self.textBrowser_2.setText(
-        #         str('%.4f' % 0.0000)+' V')  # the default state
-        # if self.CHA3 == 'OFF':
+        # else:
         #     self.textBrowser_3.setText(
-        #         str('%.4f' % 0.0000)+' V')  # the default state
-        physicalName, cha, value = self.serialPortRxDataParser.rxDataParser
-        if physicalName == 'volt':
-            if cha == 1 and self.CHA1 == 'ON':
-                self.textBrowser.setText(str('%.4f' % value)+' V')
-                print('cha1 voltage is set')
-            # else:
-            #     self.textBrowser.setText(
-            #     str('%.4f' % 0.0000)+' V')  # the default state
-            elif cha == 2 and self.CHA2 == 'ON':
-                self.textBrowser_2.setText(str('%.4f' % value)+' V')
-            # else:
-            #     self.textBrowser_2.setText(
-            #     str('%.4f' % 0.0000)+' V')  # the default state
-            elif cha == 3 and self.CHA3 == 'ON':
-                self.textBrowser_3.setText(str('%.4f' % value)+' V')
-            else:
-                pass
-            # else:
-            #     self.textBrowser_3.setText(
-            #     str('%.4f' % 0.0000)+' V')  # the default state
+        #     str('%.4f' % 0.0000)+' V')  # the default state
         # else:
         #     self.textBrowser.setText(
         #         str('%.4f' % 0.0000)+' V')  # the default state
@@ -481,15 +135,6 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
         #         pass
         # else:
         #     pass
-
-    def readData_backend_start(self):
-        """backend that reading data from device 
-        """
-        self.readData_timer = QtCore.QTimer()
-        self.readData_timer.interval = self.readData_freshTime
-        self.readData_timer.timeout.connect(self.prepareVoltAndPd)
-        # self.readData_timer.setInterval = 5000
-        self.readData_timer.start()
 
     # def readData2_backend_start(self):
     #     """backend that reading data from device
@@ -975,6 +620,7 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init):
 #     readData_thread.start()  # 启动该线程
 
 
+# ---- main function----------------------------------------------------
 def main():
     multi = Multicurrent10()
     multi.open_serial_port('COM6')
@@ -983,8 +629,8 @@ def main():
     readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
     readData_thread.start()  # 启动该线程
 
-    # 固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，确保\
-    # 程序可以双击运行
+    # 固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，\
+    # 确保程序可以双击运行
     app = QApplication(sys.argv)
 
     # # 初始化
@@ -998,6 +644,5 @@ def main():
     sys.exit(app.exec_())
 
 
-# -----------------------------------------------------------------------
 if __name__ == '__main__':
     main()

@@ -68,74 +68,7 @@ class Multicurrent10:
         while True:
             line1 = self.ser.readline(256)
             self.line = line1.decode()
-
-
-    # def read_voltage(self, source):
-    #     """Read the voltage of a source
-
-    #     Args:
-    #         source (int): such as 1 or 6
-
-    #     Returns:
-    #         voltage (float): such as 3.1210, unit: volt
-    #     """
-    #     line = " "
-    #     self.ser.flushInput()
-    #     while line[:1] != "v" or line[1:2] != str(source-1):
-    #     # while True:
-    #         line = self.ser.readline(256)
-    #         line = line.decode()
-    #         # print('read Voltage line: ', line)
-    #         if line[:1] == "v" and line[1:2] == str(source-1):
-    #             if line[3:4] == " ":
-    #                 return 0
-    #                 self.rdVolt = 0
-    #             else:
-    #                 # self.rdVolt = float(line[3:-3])
-    #                 return float(line[3:-3])
-
-    # def read_voltage(self):
-    #     """Read the voltage of a source
-
-    #     Returns:
-    #         cha (int): cha1, 2, 3, ...10
-    #         volt (float): such as 3.1210, unit: volt
-    #     """
-    #     line = " "
-    #     self.ser.flushInput()
-    #     while line[:1] != "v":
-    #         line = self.ser.readline(256)
-    #         line = line.decode()
-    #         print('read Voltage line: ', line)
-    #         if line[:1] == "v":
-    #             if line[3:4] == " ":
-    #                 cha = line[1:2]
-    #                 volt = 0.
-    #             else:
-    #                 cha = line[1:2]
-    #                 volt = float(line[3:-3])
-    #             return cha, volt
-
-    # def read_photodiode(self, source):
-    #     """Read the photodiode current. 
-
-    #     Args:
-    #         source (int): such as 1 or 6
-
-    #     Returns:
-    #         current of photodiode (float): such as 0.02, unit: uA
-    #     """
-    #     line = " "
-    #     self.ser.flushInput()
-    #     while line[:1] != "p" or line[1:2] != str(source-1):
-    #         line = self.ser.readline(256)
-    #         line = line.decode()
-    #         # print('read photodiode line:', line)
-    #         if line[:1] == "p" and line[1:2] == str(source-1):
-    #             if line[2:-1] == " ":
-    #                 return 0
-    #             else:
-    #                 return float(line[2:-1])
+            # print('line: ', self.line)
 
     def set_max_current_source(self, max_current, source):
         """Set the maximum current that can be provided by one source.
@@ -198,4 +131,3 @@ if __name__ == '__main__':
     # multi.read_voltage()
     # multi.read_voltage()
     time.sleep(2)
-    
