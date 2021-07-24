@@ -3,5 +3,6 @@
     <file>icons/Help.ico</file>
     <file>icons/loadParam.ico</file>
     <file>icons/writeToAFile.ico</file>
+    <file>icons/device.ico</file>
   </qresource>
 </RCC>

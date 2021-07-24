@@ -31,3 +31,12 @@ class GUI_LoadParam(object):
         """load SetCurrent to GUI.
         """
         self.doubleSpinBox.setValue(float(dataInFile[23]))
+        self.doubleSpinBox.setValue(float(dataInFile[24]))
+        self.doubleSpinBox.setValue(float(dataInFile[25]))
+        self.doubleSpinBox.setValue(float(dataInFile[26]))
+        self.doubleSpinBox.setValue(float(dataInFile[27]))
+        self.doubleSpinBox.setValue(float(dataInFile[28]))
+        self.doubleSpinBox.setValue(float(dataInFile[29]))
+        self.doubleSpinBox.setValue(float(dataInFile[30]))
+        self.doubleSpinBox.setValue(float(dataInFile[31]))
+        self.doubleSpinBox.setValue(float(dataInFile[32]))

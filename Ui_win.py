@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1169, 987)
+        MainWindow.resize(1165, 978)
         font = QtGui.QFont()
         font.setPointSize(10)
         MainWindow.setFont(font)
@@ -1426,7 +1426,7 @@ class Ui_MainWindow(object):
         self.label_19.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1169, 25))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1165, 29))
         self.menubar.setObjectName("menubar")
         self.menuFile = QtWidgets.QMenu(self.menubar)
         self.menuFile.setObjectName("menuFile")
@@ -1451,10 +1451,17 @@ class Ui_MainWindow(object):
         icon2.addPixmap(QtGui.QPixmap("f:\\Python_Prj\\SIMIT\\SFQ_IbCtrl\\currentSupply\\icons/Help.ico"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionDocumentation.setIcon(icon2)
         self.actionDocumentation.setObjectName("actionDocumentation")
+        self.actionProduct_web_site = QtWidgets.QAction(MainWindow)
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("f:\\Python_Prj\\SIMIT\\SFQ_IbCtrl\\currentSupply\\icons/device.ico"), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.actionProduct_web_site.setIcon(icon3)
+        self.actionProduct_web_site.setObjectName("actionProduct_web_site")
         self.menuFile.addAction(self.actionSave_entered_param_into_an_init_file)
         self.menuFile.addAction(self.actionLoad_param_into_GUI_from_the_init_file)
         self.menuFile.addSeparator()
         self.menuHelp.addAction(self.actionDocumentation)
+        self.menuHelp.addSeparator()
+        self.menuHelp.addAction(self.actionProduct_web_site)
         self.menubar.addAction(self.menuFile.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
@@ -1487,4 +1494,5 @@ class Ui_MainWindow(object):
         self.actionSave_entered_param_into_an_init_file.setText(_translate("MainWindow", "Save_entered_param_into_an_init_file"))
         self.actionLoad_param_into_GUI_from_the_init_file.setText(_translate("MainWindow", "Load_param_into_GUI_from_the_init_file"))
         self.actionDocumentation.setText(_translate("MainWindow", "Documentation"))
+        self.actionProduct_web_site.setText(_translate("MainWindow", "Product web site"))
 import icons_rc

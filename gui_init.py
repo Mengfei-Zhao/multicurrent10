@@ -1,6 +1,7 @@
 from PyQt5 import QtGui
 from PyQt5.QtWidgets import QButtonGroup
 import time
+import webbrowser
 
 # The default state of switch
 from constants import CHA1_SWITCH, CHA2_SWITCH, CHA3_SWITCH, CHA4_SWITCH, \
@@ -193,3 +194,8 @@ class GUI_Init(object):
         self.radioButton_28.setDisabled(LED_NONCLICKABLE)
         self.radioButton_29.setDisabled(LED_NONCLICKABLE)
         self.radioButton_30.setDisabled(LED_NONCLICKABLE)
+
+    def gi_openProductWebSite(self):
+        """open the product web site
+        """
+        webbrowser.open('https://luzwavelabs.com/ldc-e-multicurrent10/')

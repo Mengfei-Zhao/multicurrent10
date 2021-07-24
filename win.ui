@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1169</width>
-    <height>987</height>
+    <width>1165</width>
+    <height>978</height>
    </rect>
   </property>
   <property name="font">
@@ -2739,8 +2739,8 @@ QRadioButton::indicator:unchecked {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1169</width>
-     <height>23</height>
+     <width>1165</width>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -2756,6 +2756,8 @@ QRadioButton::indicator:unchecked {
      <string>Help</string>
     </property>
     <addaction name="actionDocumentation"/>
+    <addaction name="separator"/>
+    <addaction name="actionProduct_web_site"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuHelp"/>
@@ -2786,6 +2788,16 @@ QRadioButton::indicator:unchecked {
    </property>
    <property name="text">
     <string>Documentation</string>
+   </property>
+  </action>
+  <action name="actionProduct_web_site">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/device.ico</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Product web site</string>
    </property>
   </action>
  </widget>

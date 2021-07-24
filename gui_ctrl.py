@@ -53,6 +53,8 @@ class GUI_Ctrl(object):
             self.gf_loadParamIntoGuiFromFile)
         self.actionDocumentation.triggered.connect(
             self.gf_openDocumentation)
+        self.actionProduct_web_site.triggered.connect(
+            self.gi_openProductWebSite)
 
 
 # ---- gc_setCurrentCha ---------------------------------------------------
