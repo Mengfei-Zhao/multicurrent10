@@ -1,8 +1,6 @@
 import time
-from gui_init import GUI_Init
 from constants import SWITCH_OFF_TAIL_DELAY
-from constants import VOLT_DECIMAL_DIGITS, PD_DECIMAL_DIGITS, \
-    DEFAULT_VOLT_TEXT, DEFAULT_PD_TEXT
+from constants import DEFAULT_VOLT_TEXT, DEFAULT_PD_TEXT
 
 
 class GUI_Ctrl(object):
@@ -11,6 +9,12 @@ class GUI_Ctrl(object):
         name.
     """
 
+    def gc_init(self):
+        self.gc_setCurrEnterFinishEvent()
+        self.gc_setSwitchChangeEvent()
+        self.gc_menuBarEvent()
+
+# ---- Event ---------------------------------------------------
     def gc_setCurrEnterFinishEvent(self):
         """when the SetCurrent is enter finished, I will run gc_setCurrent_cha 
             function.
@@ -41,7 +45,19 @@ class GUI_Ctrl(object):
         self.radioButton_19.toggled.connect(self.gc_setOnOffCha10)
         self.radioButton_31.toggled.connect(self.gc_setOnOffChaTotal)
 
+    # Menu bar
+    def gc_menuBarEvent(self):
+        self.actionSave_entered_param_into_an_init_file.triggered.connect(
+            self.gf_saveEnteredParamIntoAnInitFile)
+        self.actionLoad_param_into_GUI_from_the_init_file.triggered.connect(
+            self.gf_loadParamIntoGuiFromFile)
+        self.actionDocumentation.triggered.connect(
+            self.gf_openDocumentation)
+
+
 # ---- gc_setCurrentCha ---------------------------------------------------
+
+
     def gc_setCurrentCha1(self):
         """load the setting current to device
         """

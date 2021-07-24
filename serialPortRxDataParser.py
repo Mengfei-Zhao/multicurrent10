@@ -17,16 +17,21 @@ class SerialPortRxDataParser:
             cha (int): channel
             value (float): the corresponding value of the channel
         """
-        line = self._multi.line
-        if line[:1] == "v":  # this line is a voltage
-            physicalName = 'volt'
-            cha, value = self._parseVolt(line)
-        elif line[:1] == "p":  # this line is a photodiode
-            physicalName = 'pd'
-            cha, value = self._parsePd(line)
-        else:
-            physicalName = 'none'
-            cha, value = 0, 0.
+        try:
+            line = self._multi.line
+            if line[:1] == "v":  # this line is a voltage
+                physicalName = 'volt'
+                cha, value = self._parseVolt(line)
+            elif line[:1] == "p":  # this line is a photodiode
+                physicalName = 'pd'
+                cha, value = self._parsePd(line)
+            else:
+                physicalName = 'none'
+                cha, value = 0, 0.
+        except AttributeError as e:
+            print('[Error]: ', e)
+        except UnboundLocalError as e:
+            print('[Error]: ', e)
         return physicalName, cha, value
 
     def _parseVolt(self, line):

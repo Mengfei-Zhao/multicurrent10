@@ -19,9 +19,10 @@ class Multicurrent10:
         try:
             self.ser = serial.Serial(COM)
             self.ser.write('y'.encode())
+            print('Multicurrent10 created!')
         except SerialException:
-            print('[Error]: Serial port has been occupied!')
-        print('Multicurrent10 created!')
+            print('[Error]: Can not connect to serial port!')
+
 
     def turn_on_source(self, source):
         """Turns on one source. It takes as argument an integer from 1 to 10

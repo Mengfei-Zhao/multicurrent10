@@ -25,5 +25,7 @@ PD_DECIMAL_DIGITS = '%.2f'
 DEFAULT_VOLT_TEXT = str(VOLT_DECIMAL_DIGITS % 0.0000)+' V'
 DEFAULT_PD_TEXT = str(PD_DECIMAL_DIGITS % 0.00)+' uA'
 
-# the default state of LED 
+# the default state of LED
 LED_NONCLICKABLE = True
+
+

@@ -1,8 +1,7 @@
 <RCC>
   <qresource prefix="../">
-    <file>icons/off.jpg</file>
-    <file>icons/on.jpg</file>
-    <file>icons/green_circle.png</file>
-    <file>icons/grey_circle.png</file>
+    <file>icons/Help.ico</file>
+    <file>icons/loadParam.ico</file>
+    <file>icons/writeToAFile.ico</file>
   </qresource>
 </RCC>

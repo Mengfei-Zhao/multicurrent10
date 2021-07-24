@@ -1,4 +1,6 @@
-from PyQt5.QtWidgets import QButtonGroup, QMainWindow
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QButtonGroup
+import time
 
 # The default state of switch
 from constants import CHA1_SWITCH, CHA2_SWITCH, CHA3_SWITCH, CHA4_SWITCH, \
@@ -16,11 +18,35 @@ class GUI_Init(object):
     def gi_guiInit(self):
         """Initialize the GUI.
         """
+        self.GUI_INIT_FLAG = True
+        self.setupUi(self)  # initialize the windows
+        self._gi_modifyWin
         self._gi_setDefaultSwitchCtrlWord
         self._gi_addUnitForSetCurrent  # add a unit(mA) for SetCurrent
         self._gi_setRadioButtonGroup
         self._gi_setDefaultSwitchState
         self._gi_setDefaultStateOfLed
+        self._gi_showPhoto
+        self.gf_init()  # initialize the file handle of GUI
+        self.gf_loadParamIntoGuiFromFile()
+        self.gc_init()  # initialize the signal and slot
+        time.sleep(0.5)  # seconds
+        self.gsrd_readDataBackendStart()
+
+    @property
+    def _gi_modifyWin(self):
+        """some modifications of the window.
+        """
+        self.setFixedSize(self.width(), self.height()
+                          )  # fix the size of window
+        self.setWindowIcon(QtGui.QIcon("icons/device.ico"))
+
+    @property
+    def _gi_showPhoto(self):
+        """Show a photo in GUI.
+        """
+        img = QtGui.QPixmap("icons/device.jpg")
+        self.label_19.setPixmap(img)
 
     @property
     def _gi_setDefaultSwitchState(self):
