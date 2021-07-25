@@ -152,7 +152,7 @@ class OperateExcelFile:
         for j in range(0, worksheet.ncols):
             for i in range(0, worksheet.nrows):
                 dataList.append(worksheet.cell_value(i, j))
-        # print('dataMat: ', dataMat)
+        # print('dataList: ', dataList) 
         return dataList
 
 

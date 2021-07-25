@@ -13,7 +13,7 @@ CHA10_SWITCH = 'OFF'
 CHA_TOTAL_SWITCH = 'OFF'
 
 # Time
-READ_DATA_TIME_INTERVAL = 5000  # ms
+READ_DATA_TIME_INTERVAL = 2000  # ms
 SWITCH_OFF_TAIL_DELAY = 0.2  # seconds
 
 # ---- Show volt and pd-----------------------------------
@@ -28,4 +28,8 @@ DEFAULT_PD_TEXT = str(PD_DECIMAL_DIGITS % 0.00)+' uA'
 # the default state of LED
 LED_NONCLICKABLE = True
 
+# when start program, I will load the parameters of this file to GUI.
+PARAM_INIT_FILE_WHEN_START_PROGRAM = 'guiInit2.xls'
 
+# the number of COM which used for serial port communication
+COM_NUM = 'COM6'

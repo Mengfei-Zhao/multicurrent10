@@ -1,5 +1,5 @@
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QButtonGroup
+from PyQt5.QtWidgets import QButtonGroup, QMessageBox
 import time
 import webbrowser
 
@@ -199,3 +199,13 @@ class GUI_Init(object):
         """open the product web site
         """
         webbrowser.open('https://luzwavelabs.com/ldc-e-multicurrent10/')
+
+    def closeEvent(self, event):
+        reply = QMessageBox.question(self, 'Window Close', 'Tips: Do not forget to save the result. \n \nAre you sure you want to close the window?', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        if reply == QMessageBox.Yes:
+            self.gsrd_readDataBackendStop()
+            self.multi.is_ReadSerialPortThread_True = False
+            event.accept()
+            self.multi.release_device() # close the serial port and release the multicurrent10 device
+        else: # if click No, cancel closing the window
+            event.ignore()

@@ -7,13 +7,14 @@
 # FilePath:
 # --------------------------------------------------------------
 
-
+from serial.serialutil import SerialException
 from gui_getParam import GUI_GetParam
 from gui_file import GUI_File
 from gui_showReadData import GUI_ShowReadData
 from gui_ctrl import GUI_Ctrl
 from gui_loadParam import GUI_LoadParam
 import sys
+import time
 import threading
 # PyQt5中使用的基本控件都在PyQt5.QtWidgets模块中
 from PyQt5 import QtWidgets, QtCore, QtGui
@@ -22,6 +23,7 @@ from Ui_win import Ui_MainWindow
 from gui_init import GUI_Init
 from multicurrent10 import Multicurrent10
 from serialPortRxDataParser import SerialPortRxDataParser
+from constants import COM_NUM
 
 
 class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init, GUI_Ctrl, GUI_ShowReadData, GUI_File, GUI_GetParam, GUI_LoadParam):
@@ -38,12 +40,18 @@ class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init, GUI_Ctrl, GUI_ShowReadData
 
 def main():
     multi = Multicurrent10()
-    multi.open_serial_port('COM6')
-    # print('[Info]: Multicurrent10 has been connected successfully.')
+    try:
+        multi.open_serial_port(COM_NUM)
+        print('Multicurrent10 Created!')
+    except SerialException:
+        print('[Error]: Can not connect to serial port! \n\t Tip: Please restart the power of multicurrent10, and try again. this is usually because the last abnormal exit of software')
+        sys.exit(1) # kill this program
+    multi.is_ReadSerialPortThread_True = True 
     readData_thread = threading.Thread(
         target=multi.read_serial_port_data, name="readData_thread")
     readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束
     readData_thread.start()  # 启动该线程
+    time.sleep(0.5)
 
     # 固定的，PyQt5程序都需要QApplication对象。sys.argv是命令行参数列表，\
     # 确保程序可以双击运行

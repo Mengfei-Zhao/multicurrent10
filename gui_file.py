@@ -2,6 +2,7 @@
 from PyQt5.QtWidgets import QMessageBox, QInputDialog, QFileDialog
 from operateExcelFile import OperateExcelFile
 from operateFile import OperateFile
+from constants import PARAM_INIT_FILE_WHEN_START_PROGRAM
 
 
 class GUI_File(object):
@@ -59,7 +60,7 @@ class GUI_File(object):
         """Load parameters into GUI from a specified Excel file
         """
         if self.GUI_INIT_FLAG == True:
-            fileName = 'guiInit.xls'
+            fileName = PARAM_INIT_FILE_WHEN_START_PROGRAM
             absFileName = self.OpExlFile.getPathOfParamFile(
                 fileName)  # the return is absolute path of file
             self.GUI_INIT_FLAG = False

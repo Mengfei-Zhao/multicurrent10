@@ -39,17 +39,19 @@
 
 **官方给出的软件截图：**
 
-<img src="documentation.assets/image-20210724092948752.png" alt="image-20210724092948752" style="zoom:50%;" />
+<img src="documentation.assets/image-20210724092948752.png" alt="image-20210724092948752" style="zoom:45%;" />
 
 
 
 **本程序的软件截图：**
 
-<img src="documentation.assets/image-20210723170236804.png" alt="image-20210723170236804" style="zoom:80%;" />
+<img src="documentation.assets/image-20210723170236804.png" alt="image-20210723170236804" style="zoom:70%;" />
+
+
 
 **GUI大致介绍：**
 
-总开关可以同时控制所有channels的开关。在SetCurrent中，输入电流值，回车，电流即会加载的设备中。该软件基本上可以实现对该电流源的控制和显示，并且给用户提供了控制程序接口，用户可以根据自己需求来集成到自己的应用中。
+总开关可以同时控制所有channels的开关。在SetCurrent中，输入电流值，回车，电流即会加载到设备中。该软件基本上可以实现对该电流源的控制和显示，并且给用户提供了控制程序接口，用户可以根据自己需求来集成到自己的应用中。Status中的红色radioButton作为LED指示灯，目前还没有开发这个功能。
 
 **文件选项卡介绍：**
 
@@ -60,7 +62,17 @@
 
 * documentation：查看帮助文档，即此文件
 
+## 实际测试
 
+<img src="documentation.assets/image-20210724110702420.png" alt="image-20210724110702420" style="zoom:70%;" />
+
+当设置上面这些电流参数时，用精密电流表测试对应通道的输出电流，工作正常。
+
+## 问题记录
+
+* 若出现下面的报错，这是因为上一次不正常的退出程序导致的，此时将设备重新上电，再次运行程序即可。
+
+<img src="documentation.assets/image-20210725190521132.png" alt="image-20210725190521132" style="zoom:67%;" />
 
 
 

@@ -2,6 +2,7 @@
 
 """ v1.0.0 """
 import time
+import sys
 import serial
 from serial.serialutil import SerialException
 
@@ -16,14 +17,9 @@ class Multicurrent10:
         Args:
             COM (str): such as 'COM6'
         """
-        try:
-            self.ser = serial.Serial(COM)
-            self.ser.write('y'.encode())
-            print('Multicurrent10 created!')
-        except SerialException:
-            print('[Error]: Can not connect to serial port!')
-
-
+        self.ser = serial.Serial(COM)
+        self.ser.write('y'.encode())
+        
     def turn_on_source(self, source):
         """Turns on one source. It takes as argument an integer from 1 to 10
 
@@ -65,11 +61,12 @@ class Multicurrent10:
         """
         line1 = " "
         line = " "
-        self.ser.flushInput()
-        while True:
+        while self.is_ReadSerialPortThread_True:
+            self.ser.flushInput()
             line1 = self.ser.readline(256)
             self.line = line1.decode()
             # print('line: ', self.line)
+            # time.sleep(0.5)
 
     def set_max_current_source(self, max_current, source):
         """Set the maximum current that can be provided by one source.
@@ -104,16 +101,23 @@ class Multicurrent10:
         """
         self.ser.write(('y\n').encode())
 
-    def __del__(self):
-        """This method turns off Multicurrent10, close the serial communication and delete the object.
+    def release_device(self):
+        """turn off all channels and release the serial port resource
         """
-        self.ser.write(('z\n').encode())
-        self.ser.close()
-        print('Multicurrent10 Deleted!')
+        try:
+            try:
+                self.ser.write(('z\n').encode()) # turn off all channels
+            except serial.serialutil.PortNotOpenError:
+                pass 
+            self.ser.close()
+            print('Multicurrent10 Deleted!')
+        except AttributeError as e:
+            print('[info]:', e)
 
 
 if __name__ == '__main__':
-    multi = Multicurrent10("COM6")
+    multi = Multicurrent10()
+    multi.open_serial_port('COM6')
     time.sleep(1)
     multi.turn_on_source(1)
     multi.turn_on_source(2)
