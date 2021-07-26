@@ -1,6 +1,6 @@
 from Ui_subWin_setMaxCurrentForCha import Ui_setMaxCurrentForCha
 from PyQt5 import QtGui
-from PyQt5 import uic
+# from PyQt5 import uic
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 
 import sys
@@ -10,10 +10,13 @@ from constants import DEFAULT_MAX_CURR
 class SubWin_SetMaxCurrentForCha(QMainWindow, Ui_setMaxCurrentForCha):
     """the _sw of all the methode means SubWin.
     """
+
     def __init__(self, multi, parent=None):
         self.multi = multi
         super(SubWin_SetMaxCurrentForCha, self).__init__(parent)
-        uic.loadUi('subWin_setMaxCurrentForCha.ui', self)
+        # initialize the window
+        # uic.loadUi('subWin_setMaxCurrentForCha.ui', self)
+        self.setupUi(self)
         self.setFixedSize(self.width(), self.height()
                           )  # fix the size of window
         self.setWindowIcon(QtGui.QIcon("icons/device.ico"))

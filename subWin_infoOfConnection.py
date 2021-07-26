@@ -1,12 +1,14 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5 import uic
+# from PyQt5 import uic
+from Ui_subWin_infoOfConnection import Ui_infoOfConnection
 
 
-class SubWin_InfoOfConnection(QWidget):
+class SubWin_InfoOfConnection(QWidget, Ui_infoOfConnection):
     def __init__(self):
         super().__init__()
-        uic.loadUi('subWin_infoOfConnection.ui', self)
+        # uic.loadUi('subWin_infoOfConnection.ui', self)
+        self.setupUi(self)
 
 
 if __name__ == '__main__':

@@ -28,7 +28,8 @@ class GUI_Init(object):
         # self.subWinSMCFC = None  # No sub-window yet
         self.subWinSMCFC = SubWin_SetMaxCurrentForCha(
             self.multi)  # create the window of set_max_current
-        uic.loadUi('win.ui', self)
+        # uic.loadUi('win.ui', self)
+        self.setupUi(self)  # initialize the windows
         self._gi_modifyWin
         self._gi_setDefaultSwitchCtrlWord
         self._gi_addUnitForSetCurrent  # add a unit(mA) for SetCurrent

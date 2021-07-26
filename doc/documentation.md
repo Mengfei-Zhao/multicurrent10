@@ -22,9 +22,11 @@
 
 **文件介绍：**
 
+* **Run.bat: 点击此文件，会自动运行程序**
+
 * .gitignore：用于Git的设置文件
 * constants.py：一些常数设置
-* currentSupply_main.py：主程序
+* **currentSupply_main.py：主程序**
 * gui_**.py：将MyMainWin类中的一些method重构到了这几个分立的类中，然后在MyMainWin类中对几个分类继承
 * icons.qrc，icons_rc.py ：GUI中的icons处理的相关文件
 
