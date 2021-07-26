@@ -1,13 +1,15 @@
 from PyQt5 import QtGui
-from PyQt5.QtWidgets import QButtonGroup, QMessageBox
+from PyQt5.QtWidgets import QButtonGroup, QMessageBox, QApplication
+import os
 import time
 import webbrowser
 from subWin_setMaxCurrentForCha import SubWin_SetMaxCurrentForCha
-
+from subWin_infoOfConnection import SubWin_InfoOfConnection
+from PyQt5 import uic
 # The default state of switch
 from constants import CHA1_SWITCH, CHA2_SWITCH, CHA3_SWITCH, CHA4_SWITCH, \
     CHA5_SWITCH, CHA6_SWITCH, CHA7_SWITCH, CHA8_SWITCH, CHA9_SWITCH, \
-    CHA10_SWITCH, CHA_TOTAL_SWITCH
+    CHA10_SWITCH, CHA_TOTAL_SWITCH, COM_NUM
 from constants import DEFAULT_MAX_CURR
 
 from constants import LED_NONCLICKABLE
@@ -26,7 +28,7 @@ class GUI_Init(object):
         # self.subWinSMCFC = None  # No sub-window yet
         self.subWinSMCFC = SubWin_SetMaxCurrentForCha(
             self.multi)  # create the window of set_max_current
-        self.setupUi(self)  # initialize the windows
+        uic.loadUi('win.ui', self)
         self._gi_modifyWin
         self._gi_setDefaultSwitchCtrlWord
         self._gi_addUnitForSetCurrent  # add a unit(mA) for SetCurrent
@@ -40,6 +42,7 @@ class GUI_Init(object):
         self.gc_init()  # initialize the signal and slot
         time.sleep(0.5)  # seconds
         self.gsrd_readDataBackendStart()
+        self.gi_updateConnectionStatus('connected')
 
     @property
     def _gi_modifyWin(self):
@@ -246,6 +249,42 @@ class GUI_Init(object):
                 float(self.subWinSMCFC.cha9_maxCurr))
             self.doubleSpinBox_10.setMaximum(
                 float(self.subWinSMCFC.cha10_maxCurr))
+
+    def gi_updateConnectionStatus(self, status):
+        """show the photo of connection status. 
+
+        Args:
+            status (str): 
+                if = 'connected': show blue connected picture;
+                if = 'disconnected': show grey disconnected picture;
+        """
+        if status == 'connected':
+            img = QtGui.QPixmap("icons/connected_blue2.png")
+        elif status == 'disconnected':
+            img = QtGui.QPixmap("icons/disconnected2.png")
+        self.label_21.setPixmap(img)
+
+    def gi_shutdownProgram(self):
+        """Shutdown the program
+        """
+        qApp = QApplication.instance()
+        qApp.quit()    # shutdown the GUI window
+
+    def gi_restartProgram(self):
+        """Restart the program
+        """
+        self.gi_shutdownProgram()
+        os.popen("python currentSupply_main.py", mode='w')  # run main.py
+
+    def gi_showInfoOfConnection(self):
+        """show the infomations of connection.
+        """
+        self.subWinIOC = SubWin_InfoOfConnection()
+        self.subWinIOC.label_2.setText(COM_NUM)
+        self.subWinIOC.setFixedSize(
+            self.subWinIOC.width(), self.subWinIOC.height())  # fix the size of window
+        self.subWinIOC.setWindowIcon(QtGui.QIcon("icons/device.ico"))
+        self.subWinIOC.show()
 
     def gi_openProductWebSite(self):
         """open the product web site

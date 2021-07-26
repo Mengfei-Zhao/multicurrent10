@@ -2621,10 +2621,43 @@ QRadioButton::indicator:unchecked {
    <widget class="QLabel" name="label_19">
     <property name="geometry">
      <rect>
-      <x>485</x>
+      <x>480</x>
       <y>790</y>
       <width>197</width>
       <height>140</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_20">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>875</y>
+      <width>221</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Connection status:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>865</y>
+      <width>51</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
@@ -2733,6 +2766,8 @@ QRadioButton::indicator:unchecked {
    <zorder>radioButton_31</zorder>
    <zorder>radioButton_32</zorder>
    <zorder>label_19</zorder>
+   <zorder>label_20</zorder>
+   <zorder>label_21</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -2746,6 +2781,12 @@ QRadioButton::indicator:unchecked {
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>File</string>
+    </property>
+    <property name="separatorsCollapsible">
+     <bool>false</bool>
+    </property>
+    <property name="toolTipsVisible">
+     <bool>false</bool>
     </property>
     <addaction name="actionSave_entered_param_into_an_init_file"/>
     <addaction name="actionLoad_param_into_GUI_from_the_init_file"/>
@@ -2764,6 +2805,10 @@ QRadioButton::indicator:unchecked {
      <string>Setting</string>
     </property>
     <addaction name="actionSet_max_current_for_channels"/>
+    <addaction name="separator"/>
+    <addaction name="actionReconnect_to_multicurrent10"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfo_of_connection"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuSetting"/>
@@ -2808,8 +2853,43 @@ QRadioButton::indicator:unchecked {
    </property>
   </action>
   <action name="actionSet_max_current_for_channels">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/max_curr.png</normalon>
+    </iconset>
+   </property>
    <property name="text">
     <string>Set max current for channels</string>
+   </property>
+  </action>
+  <action name="actionReconnect_to_multicurrent10">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/connected.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Reconnect to multicurrent10</string>
+   </property>
+  </action>
+  <action name="actionDisconnect_multicurrent10">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/disconnected.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Disconnect multicurrent10</string>
+   </property>
+  </action>
+  <action name="actionInfo_of_connection">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/info.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Info of connection</string>
    </property>
   </action>
  </widget>

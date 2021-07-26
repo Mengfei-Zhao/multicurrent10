@@ -57,6 +57,10 @@ class GUI_Ctrl(object):
             self.gi_showSubWin_setMaxCurrForCha)
         # this signal is connected to two event
         self.subWinSMCFC.OKButton.clicked.connect(self._gi_updateMaxCurr)
+        self.actionReconnect_to_multicurrent10.triggered.connect(
+            self.gi_restartProgram)
+        self.actionInfo_of_connection.triggered.connect(
+            self.gi_showInfoOfConnection)
         # Help
         self.actionDocumentation.triggered.connect(
             self.gf_openDocumentation)

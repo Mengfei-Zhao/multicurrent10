@@ -19,7 +19,8 @@ class Multicurrent10:
         """
         self.ser = serial.Serial(COM)
         self.ser.write('y'.encode())
-        
+        print('Multicurrent10 Created!')
+
     def turn_on_source(self, source):
         """Turns on one source. It takes as argument an integer from 1 to 10
 
@@ -106,9 +107,9 @@ class Multicurrent10:
         """
         try:
             try:
-                self.ser.write(('z\n').encode()) # turn off all channels
+                self.ser.write(('z\n').encode())  # turn off all channels
             except serial.serialutil.PortNotOpenError:
-                pass 
+                pass
             self.ser.close()
             print('Multicurrent10 Deleted!')
         except AttributeError as e:

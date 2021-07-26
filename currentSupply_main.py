@@ -29,9 +29,10 @@ from constants import COM_NUM
 class MyMainWin(QMainWindow, Ui_MainWindow, GUI_Init, GUI_Ctrl, GUI_ShowReadData, GUI_File, GUI_GetParam, GUI_LoadParam):
     """The class that control GUI window"""
 
-    def __init__(self, multi, parent=None):
+    def __init__(self, multi, readData_thread, parent=None):
         super(MyMainWin, self).__init__(parent)
         self.multi = multi
+        self.readData_thread = readData_thread
         self.serialPortRxDataParser = SerialPortRxDataParser(multi)
         self.gi_guiInit()  # initialize the GUI
 
@@ -42,7 +43,6 @@ def main():
     multi = Multicurrent10()
     try:
         multi.open_serial_port(COM_NUM)
-        print('Multicurrent10 Created!')
     except SerialException:
         print('[Error]: Can not connect to serial port! \n\t Tip: Please restart the power of multicurrent10, and try again. this is usually because the last abnormal exit of software')
         sys.exit(1)  # kill this program
@@ -58,7 +58,7 @@ def main():
     app = QApplication(sys.argv)
 
     # # 初始化
-    myWin = MyMainWin(multi)
+    myWin = MyMainWin(multi, readData_thread)
     # myWin.showMaximized()  # maximize the window
 
     # 显示界面
