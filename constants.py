@@ -33,3 +33,6 @@ PARAM_INIT_FILE_WHEN_START_PROGRAM = 'guiInit2.xls'
 
 # the number of COM which used for serial port communication
 COM_NUM = 'COM6'
+
+# the default max value of current for all channels
+DEFAULT_MAX_CURR = 200.000 # unit: mA

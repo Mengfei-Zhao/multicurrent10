@@ -1432,6 +1432,8 @@ class Ui_MainWindow(object):
         self.menuFile.setObjectName("menuFile")
         self.menuHelp = QtWidgets.QMenu(self.menubar)
         self.menuHelp.setObjectName("menuHelp")
+        self.menuSetting = QtWidgets.QMenu(self.menubar)
+        self.menuSetting.setObjectName("menuSetting")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -1456,13 +1458,17 @@ class Ui_MainWindow(object):
         icon3.addPixmap(QtGui.QPixmap("f:\\Python_Prj\\SIMIT\\SFQ_IbCtrl\\currentSupply\\icons/device.ico"), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.actionProduct_web_site.setIcon(icon3)
         self.actionProduct_web_site.setObjectName("actionProduct_web_site")
+        self.actionSet_max_current_for_channels = QtWidgets.QAction(MainWindow)
+        self.actionSet_max_current_for_channels.setObjectName("actionSet_max_current_for_channels")
         self.menuFile.addAction(self.actionSave_entered_param_into_an_init_file)
         self.menuFile.addAction(self.actionLoad_param_into_GUI_from_the_init_file)
         self.menuFile.addSeparator()
         self.menuHelp.addAction(self.actionDocumentation)
         self.menuHelp.addSeparator()
         self.menuHelp.addAction(self.actionProduct_web_site)
+        self.menuSetting.addAction(self.actionSet_max_current_for_channels)
         self.menubar.addAction(self.menuFile.menuAction())
+        self.menubar.addAction(self.menuSetting.menuAction())
         self.menubar.addAction(self.menuHelp.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -1470,7 +1476,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "LDC/E-multicurrent10     @Author: Mengfei Zhao"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "LDC/E-multicurrent10   v1.0    @Author: Mengfei Zhao"))
         self.label_4.setText(_translate("MainWindow", "Voltage"))
         self.label_5.setText(_translate("MainWindow", "Photodiode"))
         self.label_6.setText(_translate("MainWindow", "All On"))
@@ -1491,8 +1497,10 @@ class Ui_MainWindow(object):
         self.label_18.setText(_translate("MainWindow", "All Off"))
         self.menuFile.setTitle(_translate("MainWindow", "File"))
         self.menuHelp.setTitle(_translate("MainWindow", "Help"))
+        self.menuSetting.setTitle(_translate("MainWindow", "Setting"))
         self.actionSave_entered_param_into_an_init_file.setText(_translate("MainWindow", "Save_entered_param_into_an_init_file"))
         self.actionLoad_param_into_GUI_from_the_init_file.setText(_translate("MainWindow", "Load_param_into_GUI_from_the_init_file"))
         self.actionDocumentation.setText(_translate("MainWindow", "Documentation"))
         self.actionProduct_web_site.setText(_translate("MainWindow", "Product web site"))
+        self.actionSet_max_current_for_channels.setText(_translate("MainWindow", "Set max current for channels"))
 import icons_rc

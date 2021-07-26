@@ -58,6 +58,10 @@
 * Save entered param into an init file：将界面中的所有参数（包括读取到的Voltage和Photodiode）存入到一个初始化Init文件中
 * Load param into GUI from the init file：将初始化参数从文件中加载到GUI中
 
+**Setting选项卡介绍：**
+
+* Set max current for channels：为每一个通道设置最大电流值
+
 **Help选项卡介绍：**
 
 * documentation：查看帮助文档，即此文件

@@ -47,10 +47,17 @@ class GUI_Ctrl(object):
 
     # Menu bar
     def gc_menuBarEvent(self):
+        # File
         self.actionSave_entered_param_into_an_init_file.triggered.connect(
             self.gf_saveEnteredParamIntoAnInitFile)
         self.actionLoad_param_into_GUI_from_the_init_file.triggered.connect(
             self.gf_loadParamIntoGuiFromFile)
+        # Setting
+        self.actionSet_max_current_for_channels.triggered.connect(
+            self.gi_showSubWin_setMaxCurrForCha)
+        # this signal is connected to two event
+        self.subWinSMCFC.OKButton.clicked.connect(self._gi_updateMaxCurr)
+        # Help
         self.actionDocumentation.triggered.connect(
             self.gf_openDocumentation)
         self.actionProduct_web_site.triggered.connect(

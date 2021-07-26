@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>LDC/E-multicurrent10     @Author: Mengfei Zhao</string>
+   <string>LDC/E-multicurrent10   v1.0    @Author: Mengfei Zhao</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
@@ -2759,7 +2759,14 @@ QRadioButton::indicator:unchecked {
     <addaction name="separator"/>
     <addaction name="actionProduct_web_site"/>
    </widget>
+   <widget class="QMenu" name="menuSetting">
+    <property name="title">
+     <string>Setting</string>
+    </property>
+    <addaction name="actionSet_max_current_for_channels"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuSetting"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -2798,6 +2805,11 @@ QRadioButton::indicator:unchecked {
    </property>
    <property name="text">
     <string>Product web site</string>
+   </property>
+  </action>
+  <action name="actionSet_max_current_for_channels">
+   <property name="text">
+    <string>Set max current for channels</string>
    </property>
   </action>
  </widget>

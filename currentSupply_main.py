@@ -45,8 +45,8 @@ def main():
         print('Multicurrent10 Created!')
     except SerialException:
         print('[Error]: Can not connect to serial port! \n\t Tip: Please restart the power of multicurrent10, and try again. this is usually because the last abnormal exit of software')
-        sys.exit(1) # kill this program
-    multi.is_ReadSerialPortThread_True = True 
+        sys.exit(1)  # kill this program
+    multi.is_ReadSerialPortThread_True = True
     readData_thread = threading.Thread(
         target=multi.read_serial_port_data, name="readData_thread")
     readData_thread.setDaemon(True)  # 当主线程结束后，该子线程也结束

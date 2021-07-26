@@ -2,11 +2,13 @@ from PyQt5 import QtGui
 from PyQt5.QtWidgets import QButtonGroup, QMessageBox
 import time
 import webbrowser
+from subWin_setMaxCurrentForCha import SubWin_SetMaxCurrentForCha
 
 # The default state of switch
 from constants import CHA1_SWITCH, CHA2_SWITCH, CHA3_SWITCH, CHA4_SWITCH, \
     CHA5_SWITCH, CHA6_SWITCH, CHA7_SWITCH, CHA8_SWITCH, CHA9_SWITCH, \
     CHA10_SWITCH, CHA_TOTAL_SWITCH
+from constants import DEFAULT_MAX_CURR
 
 from constants import LED_NONCLICKABLE
 
@@ -20,10 +22,15 @@ class GUI_Init(object):
         """Initialize the GUI.
         """
         self.GUI_INIT_FLAG = True
+        self.GuiInitUpdateMaxCurr_Flag = True
+        # self.subWinSMCFC = None  # No sub-window yet
+        self.subWinSMCFC = SubWin_SetMaxCurrentForCha(
+            self.multi)  # create the window of set_max_current
         self.setupUi(self)  # initialize the windows
         self._gi_modifyWin
         self._gi_setDefaultSwitchCtrlWord
         self._gi_addUnitForSetCurrent  # add a unit(mA) for SetCurrent
+        self._gi_updateMaxCurr()
         self._gi_setRadioButtonGroup
         self._gi_setDefaultSwitchState
         self._gi_setDefaultStateOfLed
@@ -195,17 +202,64 @@ class GUI_Init(object):
         self.radioButton_29.setDisabled(LED_NONCLICKABLE)
         self.radioButton_30.setDisabled(LED_NONCLICKABLE)
 
+    def gi_showSubWin_setMaxCurrForCha(self):
+        """show the window of set max current for channels. 
+            SMCFC is the acronym.
+        """
+        if self.subWinSMCFC is None:
+            self.subWinSMCFC = SubWin_SetMaxCurrentForCha(
+                self.multi)  # create the window of set_max_current
+        self.subWinSMCFC.show()  # show the window
+
+    def _gi_updateMaxCurr(self):
+        """update the max currents in GUI.
+        """
+        if self.GuiInitUpdateMaxCurr_Flag == True:
+            self.doubleSpinBox.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_2.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_3.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_4.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_5.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_6.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_7.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_8.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_9.setMaximum(DEFAULT_MAX_CURR)
+            self.doubleSpinBox_10.setMaximum(DEFAULT_MAX_CURR)
+            self.GuiInitUpdateMaxCurr_Flag = False
+        else:
+            self.doubleSpinBox.setMaximum(float(self.subWinSMCFC.cha1_maxCurr))
+            self.doubleSpinBox_2.setMaximum(
+                float(self.subWinSMCFC.cha2_maxCurr))
+            self.doubleSpinBox_3.setMaximum(
+                float(self.subWinSMCFC.cha3_maxCurr))
+            self.doubleSpinBox_4.setMaximum(
+                float(self.subWinSMCFC.cha4_maxCurr))
+            self.doubleSpinBox_5.setMaximum(
+                float(self.subWinSMCFC.cha5_maxCurr))
+            self.doubleSpinBox_6.setMaximum(
+                float(self.subWinSMCFC.cha6_maxCurr))
+            self.doubleSpinBox_7.setMaximum(
+                float(self.subWinSMCFC.cha7_maxCurr))
+            self.doubleSpinBox_8.setMaximum(
+                float(self.subWinSMCFC.cha8_maxCurr))
+            self.doubleSpinBox_9.setMaximum(
+                float(self.subWinSMCFC.cha9_maxCurr))
+            self.doubleSpinBox_10.setMaximum(
+                float(self.subWinSMCFC.cha10_maxCurr))
+
     def gi_openProductWebSite(self):
         """open the product web site
         """
         webbrowser.open('https://luzwavelabs.com/ldc-e-multicurrent10/')
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Window Close', 'Tips: Do not forget to save the result. \n \nAre you sure you want to close the window?', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
+        reply = QMessageBox.question(
+            self, 'Window Close', 'Tips: Do not forget to save the result. \n \nAre you sure you want to close the window?', QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
         if reply == QMessageBox.Yes:
             self.gsrd_readDataBackendStop()
             self.multi.is_ReadSerialPortThread_True = False
             event.accept()
-            self.multi.release_device() # close the serial port and release the multicurrent10 device
-        else: # if click No, cancel closing the window
+            # close the serial port and release the multicurrent10 device
+            self.multi.release_device()
+        else:  # if click No, cancel closing the window
             event.ignore()
