@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1253</width>
-    <height>845</height>
+    <width>1165</width>
+    <height>978</height>
    </rect>
   </property>
   <property name="font">
@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>LDC/E-multicurrent10     @Author: Mengfei Zhao</string>
+   <string>LDC/E-multicurrent10   v1.0    @Author: Mengfei Zhao</string>
   </property>
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
@@ -917,6 +917,9 @@ QRadioButton::indicator:unchecked {
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="checkable">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QTextBrowser" name="textBrowser_2">
@@ -2347,7 +2350,7 @@ QRadioButton::indicator:unchecked {
     <property name="geometry">
      <rect>
       <x>1065</x>
-      <y>435</y>
+      <y>440</y>
       <width>31</width>
       <height>36</height>
      </rect>
@@ -2615,6 +2618,52 @@ QRadioButton::indicator:unchecked {
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="label_19">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>790</y>
+      <width>197</width>
+      <height>140</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_20">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>875</y>
+      <width>221</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Connection status:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_21">
+    <property name="geometry">
+     <rect>
+      <x>235</x>
+      <y>865</y>
+      <width>51</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>groupBox_11</zorder>
    <zorder>groupBox_10</zorder>
    <zorder>groupBox_9</zorder>
@@ -2716,34 +2765,131 @@ QRadioButton::indicator:unchecked {
    <zorder>label_18</zorder>
    <zorder>radioButton_31</zorder>
    <zorder>radioButton_32</zorder>
+   <zorder>label_19</zorder>
+   <zorder>label_20</zorder>
+   <zorder>label_21</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1253</width>
+     <width>1165</width>
      <height>29</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <property name="separatorsCollapsible">
+     <bool>false</bool>
+    </property>
+    <property name="toolTipsVisible">
+     <bool>false</bool>
+    </property>
+    <addaction name="actionSave_entered_param_into_an_init_file"/>
+    <addaction name="actionLoad_param_into_GUI_from_the_init_file"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionDocumentation"/>
+    <addaction name="separator"/>
+    <addaction name="actionProduct_web_site"/>
+   </widget>
+   <widget class="QMenu" name="menuSetting">
+    <property name="title">
+     <string>Setting</string>
+    </property>
+    <addaction name="actionSet_max_current_for_channels"/>
+    <addaction name="separator"/>
+    <addaction name="actionReconnect_to_multicurrent10"/>
+    <addaction name="separator"/>
+    <addaction name="actionInfo_of_connection"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuSetting"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionon">
+  <action name="actionSave_entered_param_into_an_init_file">
    <property name="icon">
     <iconset>
-     <normaloff>icons/on.jpg</normaloff>icons/on.jpg</iconset>
+     <normaloff>icons/writeToAFile.ico</normaloff>icons/writeToAFile.ico</iconset>
    </property>
    <property name="text">
-    <string>on</string>
+    <string>Save_entered_param_into_an_init_file</string>
    </property>
   </action>
-  <action name="actionoff">
+  <action name="actionLoad_param_into_GUI_from_the_init_file">
    <property name="icon">
     <iconset>
-     <normaloff>icons/off.jpg</normaloff>icons/off.jpg</iconset>
+     <normaloff>icons/loadParam.ico</normaloff>icons/loadParam.ico</iconset>
    </property>
    <property name="text">
-    <string>off</string>
+    <string>Load_param_into_GUI_from_the_init_file</string>
+   </property>
+  </action>
+  <action name="actionDocumentation">
+   <property name="icon">
+    <iconset>
+     <normaloff>icons/Help.ico</normaloff>icons/Help.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Documentation</string>
+   </property>
+  </action>
+  <action name="actionProduct_web_site">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/device.ico</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Product web site</string>
+   </property>
+  </action>
+  <action name="actionSet_max_current_for_channels">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/max_curr.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Set max current for channels</string>
+   </property>
+  </action>
+  <action name="actionReconnect_to_multicurrent10">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/connected.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Reconnect to multicurrent10</string>
+   </property>
+  </action>
+  <action name="actionDisconnect_multicurrent10">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/disconnected.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Disconnect multicurrent10</string>
+   </property>
+  </action>
+  <action name="actionInfo_of_connection">
+   <property name="icon">
+    <iconset>
+     <normalon>icons/info.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Info of connection</string>
    </property>
   </action>
  </widget>

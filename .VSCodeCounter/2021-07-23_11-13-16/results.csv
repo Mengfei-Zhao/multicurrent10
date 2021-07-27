@@ -1,0 +1,24 @@
+"filename", "language", "Python", "XML", "JSON with Comments", "Markdown", "comment", "blank", "total"
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\LDCEmulticurrent10.code-workspace", "JSON with Comments", 0, 0, 8, 0, 0, 1, 9
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\Ui_win.py", "Python", 1476, 0, 0, 0, 7, 8, 1491
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\constants.py", "Python", 18, 0, 0, 0, 6, 6, 30
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\currentSupply_main.py", "Python", 44, 0, 0, 0, 17, 13, 74
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\demo.py", "Python", 11, 0, 0, 0, 8, 12, 31
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\doc\documentation.md", "Markdown", 0, 0, 0, 0, 0, 1, 1
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_ctrl.py", "Python", 240, 0, 0, 0, 113, 36, 389
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_file.py", "Python", 51, 0, 0, 0, 20, 9, 80
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_getParam.py", "Python", 50, 0, 0, 0, 13, 7, 70
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_init.py", "Python", 135, 0, 0, 0, 21, 23, 179
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_loadParam.py", "Python", 17, 0, 0, 0, 12, 5, 34
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_showReadData.py", "Python", 80, 0, 0, 0, 9, 7, 96
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\icons.qrc", "XML", 0, 7, 0, 0, 0, 1, 8
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\icons_rc.py", "Python", 8351, 0, 0, 0, 6, 11, 8368
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\multicurrent10.py", "Python", 57, 0, 0, 0, 58, 19, 134
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\operateExcelFile.py", "Python", 72, 0, 0, 0, 77, 19, 168
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\operateFile.py", "Python", 8, 0, 0, 0, 17, 4, 29
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\close.py", "Python", 3, 0, 0, 0, 0, 0, 3
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\serialCtrl.py", "Python", 13, 0, 0, 0, 7, 6, 26
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\wifiCtrl.py", "Python", 10, 0, 0, 0, 0, 1, 11
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\serialPortRxDataParser.py", "Python", 36, 0, 0, 0, 21, 7, 64
+"f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\win.ui", "XML", 0, 2700, 0, 0, 0, 97, 2797
+"Total", "-", 10672, 2707, 8, 0, 412, 293, 14092

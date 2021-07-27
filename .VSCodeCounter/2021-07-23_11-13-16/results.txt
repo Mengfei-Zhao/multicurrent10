@@ -1,0 +1,51 @@
+Date : 2021-07-23 11:13:16
+Directory : f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply
+Total : 22 files,  13387 codes, 412 comments, 293 blanks, all 14092 lines
+
+Languages
++--------------------+------------+------------+------------+------------+------------+
+| language           | files      | code       | comment    | blank      | total      |
++--------------------+------------+------------+------------+------------+------------+
+| Python             |         18 |     10,672 |        412 |        193 |     11,277 |
+| XML                |          2 |      2,707 |          0 |         98 |      2,805 |
+| JSON with Comments |          1 |          8 |          0 |          1 |          9 |
+| Markdown           |          1 |          0 |          0 |          1 |          1 |
++--------------------+------------+------------+------------+------------+------------+
+
+Directories
++--------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                           | files      | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                              |         22 |     13,387 |        412 |        293 |     14,092 |
+| doc                                                                            |          1 |          0 |          0 |          1 |          1 |
+| other                                                                          |          3 |         26 |          7 |          7 |         40 |
++--------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++--------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| filename                                                                       | language           | code       | comment    | blank      | total      |
++--------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\LDCEmulticurrent10.code-workspace | JSON with Comments |          8 |          0 |          1 |          9 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\Ui_win.py                         | Python             |      1,476 |          7 |          8 |      1,491 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\constants.py                      | Python             |         18 |          6 |          6 |         30 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\currentSupply_main.py             | Python             |         44 |         17 |         13 |         74 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\demo.py                           | Python             |         11 |          8 |         12 |         31 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\doc\documentation.md              | Markdown           |          0 |          0 |          1 |          1 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_ctrl.py                       | Python             |        240 |        113 |         36 |        389 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_file.py                       | Python             |         51 |         20 |          9 |         80 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_getParam.py                   | Python             |         50 |         13 |          7 |         70 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_init.py                       | Python             |        135 |         21 |         23 |        179 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_loadParam.py                  | Python             |         17 |         12 |          5 |         34 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\gui_showReadData.py               | Python             |         80 |          9 |          7 |         96 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\icons.qrc                         | XML                |          7 |          0 |          1 |          8 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\icons_rc.py                       | Python             |      8,351 |          6 |         11 |      8,368 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\multicurrent10.py                 | Python             |         57 |         58 |         19 |        134 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\operateExcelFile.py               | Python             |         72 |         77 |         19 |        168 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\operateFile.py                    | Python             |          8 |         17 |          4 |         29 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\close.py                    | Python             |          3 |          0 |          0 |          3 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\serialCtrl.py               | Python             |         13 |          7 |          6 |         26 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\other\wifiCtrl.py                 | Python             |         10 |          0 |          1 |         11 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\serialPortRxDataParser.py         | Python             |         36 |         21 |          7 |         64 |
+| f:\Python_Prj\SIMIT\SFQ_IbCtrl\currentSupply\win.ui                            | XML                |      2,700 |          0 |         97 |      2,797 |
+| Total                                                                          |                    |     13,387 |        412 |        293 |     14,092 |
++--------------------------------------------------------------------------------+--------------------+------------+------------+------------+------------+

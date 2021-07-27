@@ -10,7 +10,7 @@ class GUI_ShowReadData(object):
     """
 
     def gsrd_prepareVoltAndPd(self):
-        physicalName, cha, value = self.serialPortRxDataParser.rxDataParser
+        physicalName, cha, value = self.serialPortRxDataParser.rxDataParser()
         if physicalName == 'volt':
             if cha == 1 and self.CHA1 == 'ON':
                 self.textBrowser.setText(str(VOLT_DECIMAL_DIGITS % value)+' V')
